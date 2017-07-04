@@ -1,22 +1,18 @@
 <?php
-/*require '../../class/Usuario.php';
-require '../../class/Admin.php';
-
-$a = new Admin(new Usuario());*/
+include('../Model/DBase.php');
 require '../Model/Produto.php';
 require '../Model/Usuario.php';
 
 
-use model\Usuario;
+$user = new Usuario();
+$product = new Produto();
 
-$u = new Usuario('Samuel', '123');
+$object = ['email' => "samuelronha@gmail.com", 'senha' => "123"];
 
-$object = ["nome@email", "senha"];
+$p = new DBase();
 
+$user->save($object, $p);
 
-
-$u->hydrator($object);
-
-//
-//$u->save();
+$object = ['nome' => "Abobora", 'valor' => "10.99"];
+$product->save($object, $p);
 

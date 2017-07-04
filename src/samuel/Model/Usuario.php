@@ -1,6 +1,5 @@
 <?php
-namespace Model;
-include('Pdo.php');
+include_once('Traits/Hydrator.php');
 
 /**
  * Created by IntelliJ IDEA.
@@ -8,7 +7,6 @@ include('Pdo.php');
  * Date: 26/06/2017
  * Time: 10:46
  */
-
 class Usuario
 {
 
@@ -20,20 +18,14 @@ class Usuario
      * @param $email
      * @param $senha
      */
-    public function __construct($email, $senha)
+
+    use Hydrator;
+
+
+    function save($objects, $p)
     {
-        $this->email = $email;
-        $this->senha = $senha;
-    }
-
-    use Traits\Hydrator;
-
-
-    function save()
-    {
-        $sql = "insert into usuario (email, senha) values(:email, :senha)";
-        $p = new Pdo($sql, $this->email, $this->senha);
-
+        $this->hydrator($objects);
+        $p->saveUser($this->email, $this->senha);
     }
 
     /**
@@ -70,5 +62,3 @@ class Usuario
 
 
 }
-
-?>
