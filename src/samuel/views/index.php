@@ -3,12 +3,20 @@
 require '../../class/Admin.php';
 
 $a = new Admin(new Usuario());*/
-require '../model/Produto.php';
-require '../model/Usuario.php';
+require '../Model/Produto.php';
+require '../Model/Usuario.php';
+
+
 use model\Usuario;
 
 $u = new Usuario('Samuel', '123');
 
+$object = ["nome@email", "senha"];
 
-$u->save();
+
+
+$u->hydrator($object);
+
+//
+//$u->save();
 

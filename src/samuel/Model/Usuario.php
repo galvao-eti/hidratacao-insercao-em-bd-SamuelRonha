@@ -1,5 +1,7 @@
 <?php
-namespace model;
+namespace Model;
+include('Pdo.php');
+
 /**
  * Created by IntelliJ IDEA.
  * User: Samuel
@@ -9,10 +11,9 @@ namespace model;
 
 class Usuario
 {
+
     private $email;
     private $senha;
-
-    private $sql = "insert into usuario (login, pass) values(:email, :senha)";
 
     /**
      * Usuario constructor.
@@ -25,9 +26,14 @@ class Usuario
         $this->senha = $senha;
     }
 
+    use Traits\Hydrator;
 
-    function save(){
-        $p = new Pdo($this->sql);
+
+    function save()
+    {
+        $sql = "insert into usuario (email, senha) values(:email, :senha)";
+        $p = new Pdo($sql, $this->email, $this->senha);
+
     }
 
     /**
@@ -63,6 +69,6 @@ class Usuario
     }
 
 
-
-
 }
+
+?>
